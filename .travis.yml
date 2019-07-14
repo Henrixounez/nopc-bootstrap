@@ -25,9 +25,9 @@ install:
     - make
     - DESTDIR=../runtime/Cpp/run make install
     - cd ../runtime/Cpp/run/
-    - sudo cp -r usr/local/lib/ /usr/local/lib/
+    - sudo cp -r usr/local/lib/ /usr/local/lib
     - sudo cp -r usr/local/include/antlr4-runtime/ /usr/local/include/
-    - sudo cp -r usr/local/share/ /usr/local/share/
+    - sudo cp -r usr/local/share/ /usr/local/share
 
 script:
     - cd $TRAVIS_BUILD_DIR

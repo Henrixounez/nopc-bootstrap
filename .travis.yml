@@ -28,6 +28,7 @@ install:
     - sudo cp -a usr/local/lib/. /usr/local/lib/
     - sudo cp -a usr/local/lib/. /usr/lib/
     - sudo cp -r usr/local/include/antlr4-runtime/ /usr/local/include/
+    - sudo cp -r usr/local/include/antlr4-runtime/ /usr/include/
     - sudo cp -a usr/local/share/. /usr/local/share/
 
 script:

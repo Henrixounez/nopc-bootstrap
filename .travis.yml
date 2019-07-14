@@ -1,0 +1,35 @@
+sudo: require
+language: cpp
+compiler: clang
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+        packages:
+            - llvm
+            - libc++-dev
+            - clang
+            - clang-format
+            - ninja-build
+
+install:
+    - wget -O /tmp/antlr4.zip https://www.antlr.org/download/antlr4-cpp-runtime-4.7.2-source.zip
+    - wget -O /tmp/antlr4.jar https://www.antlr.org/download/antlr-4.7.2-complete.jar
+    - sudo cp /tmp/antlr4.jar /usr/local/bin/antlr4.jar
+    - cd /tmp
+    - unzip /tmp/antlr4.zip -d antlr4-cpp-runtime
+    - cd antlr4-cpp-runtime
+    - mkdir build && mkdir run && cd build
+    - cmake .. -DANTLR_JAR_LOCATION=/tmp/antlr4.jar -DWITH_DEMO=True
+    - make
+    - DESTDIR=../runtime/Cpp/run make install
+    - cd ../runtime/Cpp/run/
+    - sudo cp usr/local/lib/* /usr/local/lib/
+    - sudo cp -r usr/local/include/antlr4-runtime/ /usr/local/include/antlr4-runtime/
+    - sudo cp -r usr/local/share /usr/local/share/
+
+script:
+    - cd $TRAVIS_BUILD_DIR
+    - clang -v && make --version && cmake --version
+    - ./check_clang_format.sh
+    - ./build.sh

@@ -33,4 +33,7 @@ script:
     - cd $TRAVIS_BUILD_DIR
     - clang -v && make --version && cmake --version
     - ./check_clang_format.sh
+    - ls /usr/local/lib/
+    - ls /usr/local/include/
+    - ls /usr/local/share/
     - ./build.sh
